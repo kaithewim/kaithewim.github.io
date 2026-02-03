@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kaison Wimmer | Portfolio</title>
+    <title>kaithewim's portfolio think</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <p class="eyebrow">welcome to the page</p>
-        <h1>kaison wimmer</h1>
-        <p class="username">kaithewim</p>
+        <p class="eyebrow">
+          <a href="https://www.tiktok.com/@keidokindness/video/7563430066525375800" target="_blank" rel="noopener noreferrer">こんにちわグワン、みんなースライムス</a> | ( ´ ▽ ` )ﾉ
+        </p>
+        <h1>kai wimmer</h1>
+        <p class="username">@kaithewim</p>
         <p class="subtitle">
           international business • marketing • entrepreneurship
         </p>
@@ -76,10 +78,10 @@
       <section class="card" id="about">
         <h2>about</h2>
         <p>
-          hey, i'm kai. i'm a business student at usc and i really like music.
+          hey, i'm kai. i'm a business student at usc with a minor in japanese, and i really like music.
         </p>
         <p class="details">
-          i'm a freshman by year, junior by credits at the darla moore school of business in columbia, sc. i'm a barista and make an iced pour over every morning, followed by 2-3 later in the day. i make music and try my best to listen to all genres, finding something i can enjoy in each one.
+          i'm a freshman by year, junior by credits at the darla moore school of business in columbia, sc. i'm a barista and make an iced pour over every morning, followed by 2-3 later in the day. i make music and try my best to listen to all genres, finding something i can enjoy in each one. my dream after college is to open a cafe ministry in japan to spread the gospel through my love of coffee.
         </p>
       </section>
 
@@ -93,8 +95,7 @@
             <li>mobile barista — brew la la coffee</li>
             <li>caterer — waiter’s choice catering</li>
             <li>barista — knowledge perk columbia</li>
-          </ul>
-          <p class="details">
+          </ul>          <hr>          <p class="details">
             in case you can't tell, i really like working in coffee.
           </p>
         </div>
@@ -109,28 +110,35 @@
             <li>working out</li>
             <li>listening to music</li>
           </ul>
+          <hr>
           <p class="details">
-            i'm into late-night synths, neon visuals, and anything that feels
-            a little futuristic.
+            lately i've been listening to korean idm and mashcore, playing old minecraft versions on call with friends, and watching a lot of youtube (shoutout ludwig, cjya, and bishu).
           </p>
         </div>
       </section>
 
       <section class="card" id="contact">
         <h2>contact</h2>
-        <p>drop in with your email, socials, or collab ideas.</p>
+        <p>hmu @kaithewim on insta for some music recs</p>
         <p class="details">
-          i'm always down to talk music, games, or new projects.
+          or to chat about coffee, games, anime, whatever. i lowkey need followers tbh
         </p>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="container">
-        <p>© 2026 kaison wimmer</p>
+        <p>© 2026 kaithewim</p>
       </div>
-      <a href="images/LEMMY 4.gif" class="easter-egg">?</a>
+      <button class="easter-egg" id="easter-egg-btn">?</button>
     </footer>
+
+    <div id="gif-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <img src="images/LEMMY 4.gif" alt="Easter egg" />
+      </div>
+    </div>
 
     <script>
       const audioPlayer = document.getElementById("audio-player");
@@ -257,7 +265,13 @@
       });
 
       prevTrack.addEventListener("click", () => {
-        playIndex(currentIndex - 1);
+        if (audioPlayer.currentTime > 1.5) {
+          audioPlayer.currentTime = 0;
+          progress.value = 0;
+          currentTime.textContent = formatTime(0);
+        } else {
+          playIndex(currentIndex - 1);
+        }
       });
 
       nextTrack.addEventListener("click", () => {
@@ -301,6 +315,28 @@
 
       audioPlayer.volume = Number(volume.value);
       setTrack(currentIndex);
+
+      // Modal functionality
+      const modal = document.getElementById('gif-modal');
+      const easterEggBtn = document.getElementById('easter-egg-btn');
+      const closeBtn = document.querySelector('.close-modal');
+      const easterEggAudio = new Audio("music/lemmy%20nyah.mp3");
+
+      easterEggBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        easterEggAudio.currentTime = 0;
+        easterEggAudio.play();
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
     </script>
   </body>
 </html>
