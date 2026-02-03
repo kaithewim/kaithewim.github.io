@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaison Wimmer | Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <p class="eyebrow">welcome to the page</p>
+        <h1>kaison wimmer</h1>
+        <p class="username">kaithewim</p>
+        <p class="subtitle">
+          international business • marketing • entrepreneurship
+        </p>
+        <p class="school">
+          university of south carolina — darla moore school of business
+        </p>
+      </div>
+    </header>
+
+    <section class="audio-panel">
+      <div class="container">
+        <p class="audio-label">now playing (shuffle)</p>
+        <div class="player" role="group" aria-label="audio player">
+          <button class="player-button" id="prev-track" type="button" aria-label="previous">
+            ⏮
+          </button>
+          <button class="player-button" id="play-toggle" type="button" aria-label="play">
+            ▶
+          </button>
+          <button class="player-button" id="next-track" type="button" aria-label="next">
+            ⏭
+          </button>
+          <div class="player-meta">
+            <div class="track-info">
+              <a href="#" id="track-link" class="track-link">loading...</a>
+              <p class="track-artist" id="track-artist"></p>
+            </div>
+            <div class="player-bar">
+              <span class="time" id="current-time">0:00</span>
+              <input
+                class="progress"
+                id="progress"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                step="0.1"
+                aria-label="seek"
+              />
+              <span class="time" id="duration">0:00</span>
+            </div>
+          </div>
+          <div class="volume">
+            <span class="volume-icon">🔊</span>
+            <input
+              class="volume-slider"
+              id="volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0.8"
+              aria-label="volume"
+            />
+          </div>
+        </div>
+        <audio id="audio-player"></audio>
+      </div>
+    </section>
+
+    <main class="container">
+      <section class="card" id="about">
+        <h2>about</h2>
+        <p>
+          hey, i'm kaison. i study international business, marketing, and
+          entrepreneurship.
+        </p>
+        <p class="details">
+          i spend a lot of time coding, making music, and chasing new ideas. if
+          i'm not at the gym or gaming, i'm probably listening to a playlist and
+          tinkering with something.
+        </p>
+      </section>
+
+      <section class="grid">
+        <div class="card" id="work">
+          <h2>work history</h2>
+          <ul>
+            <li>front service clerk — publix</li>
+            <li>barista — knowledge perk coffee company</li>
+            <li>caterer — waiter’s choice catering</li>
+          </ul>
+          <p class="details">
+            i like fast-paced environments and learning how teams move together.
+          </p>
+        </div>
+
+        <div class="card" id="interests">
+          <h2>interests</h2>
+          <ul>
+            <li>programming</li>
+            <li>music production</li>
+            <li>gaming</li>
+            <li>working out</li>
+            <li>listening to music</li>
+          </ul>
+          <p class="details">
+            i'm into late-night synths, neon visuals, and anything that feels
+            a little futuristic.
+          </p>
+        </div>
+      </section>
+
+      <section class="card" id="contact">
+        <h2>contact</h2>
+        <p>drop in with your email, socials, or collab ideas.</p>
+        <p class="details">
+          i'm always down to talk music, games, or new projects.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2026 kaison wimmer</p>
+      </div>
+      <a href="images/LEMMY 4.gif" class="easter-egg">?</a>
+    </footer>
+
+    <script>
+      const audioPlayer = document.getElementById("audio-player");
+      const playToggle = document.getElementById("play-toggle");
+      const prevTrack = document.getElementById("prev-track");
+      const nextTrack = document.getElementById("next-track");
+      const trackLink = document.getElementById("track-link");
+      const trackArtist = document.getElementById("track-artist");
+      const progress = document.getElementById("progress");
+      const currentTime = document.getElementById("current-time");
+      const duration = document.getElementById("duration");
+      const volume = document.getElementById("volume");
+      const tracks = [
+        "LSD DREAMZ.mp3",
+        "「Dorephin Shopping Center」 Azikazin Magic World.mp3",
+        "flow of the moment.mp3",
+        "✣✣✣ cellular (3 3 3) Ǝᗡ∀ᴚ⅁Oᴚ⊥Ǝᴚ ©©© [MV] (feat. YOHEI_نقره خدا).mp3",
+        "過去主義生死観.mp3",
+        "I Miss You so Much (Parts. 1, 2 & 3).mp3",
+        "Earth to G San (feat. Tetsuya Hikita).mp3",
+        "Flim.mp3",
+        "there's a hole in my heart that won't go away.mp3",
+        "SLOWDANCE.mp3"
+      ];
+
+      const shuffled = tracks
+        .map((track) => ({ track, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ track }) => track);
+
+      let currentIndex = 0;
+
+      const trackMetadata = {
+        "LSD DREAMZ.mp3": {
+          title: "LSD DREAMZ",
+          artist: "oseanworld",
+          spotify: "https://open.spotify.com/track/0sfR06rXbUEbcFi2GQUFgW?si=459e1fa7eff14bf4"
+        },
+        "「Dorephin Shopping Center」 Azikazin Magic World.mp3": {
+          title: "「Dorephin Shopping Center」",
+          artist: "Azikazin Magic World",
+          spotify: "https://open.spotify.com/track/2k2kGZ67OqZ0HFZKVY0XR0?si=90d91255803a46a9"
+        },
+        "flow of the moment.mp3": {
+          title: "flow of the moment",
+          artist: "kiyosumi",
+          spotify: "https://open.spotify.com/track/5OCEFznemHp0GQ3ndxiUuO?si=293d76f639dd4128"
+        },
+        "✣✣✣ cellular (3 3 3) Ǝᗡ∀ᴚ⅁Oᴚ⊥Ǝᴚ ©©© [MV] (feat. YOHEI_نقره خدا).mp3": {
+          title: "✣✣✣ cellular (3 3 3) Ǝᗡ∀ᴚ⅁Oᴚ⊥Ǝᴚ ©©©",
+          artist: "uziellsiilver",
+          spotify: "https://open.spotify.com/track/6vRvUlWX2lLrNKGx0L2UlZ?si=3c90fd9044b0497d"
+        },
+        "過去主義生死観.mp3": {
+          title: "過去主義生死観",
+          artist: "PostmodernHippie",
+          spotify: "https://open.spotify.com/track/2yzMJWauYeGtrG8CzAQXJ3?si=066ddcb053874d0f"
+        },
+        "I Miss You so Much (Parts. 1, 2 & 3).mp3": {
+          title: "I Miss You so Much (Parts. 1, 2 & 3)",
+          artist: "Neat Beats",
+          spotify: "https://open.spotify.com/track/68DR2Z0eEr2wjLoRHowSU1?si=8e7c43e58d29442a"
+        },
+        "Earth to G San (feat. Tetsuya Hikita).mp3": {
+          title: "Earth to G San (feat. Tetsuya Hikita)",
+          artist: "Kidkanevil",
+          spotify: "https://open.spotify.com/track/0LojFkNvS3FBDmdF2NXPMy?si=f15a554eeefe4ac2"
+        },
+        "Flim.mp3": {
+          title: "Flim",
+          artist: "Aphex Twin",
+          spotify: "https://open.spotify.com/track/3JJ4BoL9WVHk4Yye2EGJC7?si=18ee6f46284f4387"
+        },
+        "there's a hole in my heart that won't go away.mp3": {
+          title: "there's a hole in my heart that won't go away",
+          artist: "ERRx",
+          spotify: "https://open.spotify.com/track/1Huv3dfeyZdDoweQYxf9dT?si=792d866552204e3a"
+        },
+        "SLOWDANCE.mp3": {
+          title: "SLOWDANCE",
+          artist: "CERIME",
+          spotify: "https://open.spotify.com/track/13226TbTkti0okELSWBHoH?si=47178b1590f240a5"
+        }
+      };
+
+      const setTrack = (index) => {
+        const fileName = shuffled[index % shuffled.length];
+        const encodedPath = `music/${encodeURIComponent(fileName)}`;
+        console.log('Loading track:', fileName);
+        console.log('Encoded path:', encodedPath);
+        audioPlayer.src = encodedPath;
+        const meta = trackMetadata[fileName];
+        trackLink.textContent = meta.title;
+        trackLink.href = meta.spotify;
+        trackLink.target = "_blank";
+        trackLink.rel = "noopener noreferrer";
+        trackArtist.textContent = meta.artist;
+      };
+
+      audioPlayer.addEventListener("error", (e) => {
+        console.error('Audio error:', audioPlayer.error);
+        console.error('Failed source:', audioPlayer.src);
+      });
+
+      const playIndex = (index) => {
+        currentIndex = (index + shuffled.length) % shuffled.length;
+        setTrack(currentIndex);
+        audioPlayer.play();
+      };
+
+      const formatTime = (seconds) => {
+        if (!Number.isFinite(seconds)) return "0:00";
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+        return `${minutes}:${secs}`;
+      };
+
+      playToggle.addEventListener("click", () => {
+        if (audioPlayer.paused) {
+          audioPlayer.play();
+        } else {
+          audioPlayer.pause();
+        }
+      });
+
+      prevTrack.addEventListener("click", () => {
+        playIndex(currentIndex - 1);
+      });
+
+      nextTrack.addEventListener("click", () => {
+        playIndex(currentIndex + 1);
+      });
+
+      audioPlayer.addEventListener("play", () => {
+        playToggle.textContent = "❚❚";
+        playToggle.setAttribute("aria-label", "pause");
+      });
+
+      audioPlayer.addEventListener("pause", () => {
+        playToggle.textContent = "▶";
+        playToggle.setAttribute("aria-label", "play");
+      });
+
+      audioPlayer.addEventListener("timeupdate", () => {
+        const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100 || 0;
+        progress.value = percent;
+        currentTime.textContent = formatTime(audioPlayer.currentTime);
+      });
+
+      audioPlayer.addEventListener("loadedmetadata", () => {
+        duration.textContent = formatTime(audioPlayer.duration);
+      });
+
+      progress.addEventListener("input", () => {
+        const time = (progress.value / 100) * audioPlayer.duration;
+        if (Number.isFinite(time)) {
+          audioPlayer.currentTime = time;
+        }
+      });
+
+      volume.addEventListener("input", () => {
+        audioPlayer.volume = Number(volume.value);
+      });
+
+      audioPlayer.addEventListener("ended", () => {
+        playIndex(currentIndex + 1);
+      });
+
+      audioPlayer.volume = Number(volume.value);
+      setTrack(currentIndex);
+    </script>
+  </body>
+</html>
