@@ -143,6 +143,8 @@ body {
 .time {
   font-size: 0.75rem;
   color: #c4b5fd;
+  min-width: 2.5rem;
+  text-align: center;
 }
 
 .progress,
